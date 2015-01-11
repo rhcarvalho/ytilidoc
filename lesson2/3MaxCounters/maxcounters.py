@@ -1,16 +1,19 @@
 # (77%) https://codility.com/demo/results/demoE7T88E-7FZ
+# (100%) https://codility.com/demo/results/demoFQU458-YWW
 
 def solution(N, A):
     count = [0] * N
-    mx = 0
+    mx = mn = 0
     for X in A:
         if 1 <= X <= N:
             # increase(X)
-            count[X-1] += 1
+            count[X-1] = max(count[X-1], mn) + 1
             mx = max(mx, count[X-1])
         elif X == N+1:
             # max counter
-            count = [mx] * N
+            mn = mx
+    for i in xrange(N):
+        count[i] = max(count[i], mn)
     return count
 
 
